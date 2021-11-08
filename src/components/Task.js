@@ -1,7 +1,28 @@
+import { useState } from "react";
+import Backdrop from "./Backdrop";
+import Modal from "./Modal";
+
 function Task (props) {
+    const [showModal, setShowModal] = useState(false);
+
+    const showModalHandler = () => {
+        setShowModal(true);
+    }
+
+    const closeModalHandler = () => {
+        setShowModal(false);
+    }
+
     return(
-    <div>
-        <h1>{props.task}</h1>
+    <div className="card">
+        <h2>{props.task}</h2>
+        <div className="actions">
+            <button className="btn" onClick={showModalHandler}>Delete</button>
+        </div>
+
+        { showModal && <Modal text="Are you sure?" onClick={closeModalHandler} /> }
+        { showModal && <Backdrop onClick={closeModalHandler} /> }
+
     </div>)
 }
 
